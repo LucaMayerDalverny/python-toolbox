@@ -1,0 +1,7 @@
+# Python toolbox .gitignore
+
+# Pycharm folder
+.idea
+
+# Pycache folders
+__pycache__
