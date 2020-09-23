@@ -1,5 +1,8 @@
+"""
+Contains functions for saving data representations
+"""
 import matplotlib.pyplot as plt
-from matplotlib.ticker import NullFormatter
+from matplotlib.ticker import NullFormatter, ScalarFormatter
 
 
 def graph(directory, curves, legends,
@@ -10,28 +13,30 @@ def graph(directory, curves, legends,
 
     Parameters
     ----------
-        directory : string
-            The directory where the graph will be saved
-        curves : list[list[int or float]]
-            The list of curves to plot in the graph
-        legends : list[string]
-            The labels corresponding to the curves
-        abscissa_label : string
-            The label for the abscissa axis
-        ordinate_label : string
-            The label for the ordinate axis
-        title : string
-            The main title for the graph
-        show_grid : bool
-            To show the grid of the graph
-        abscissa_scale : string
-            The scale to use for the abscissa axis ('linear', 'log', 'logit' etc.)
-        ordinate_scale : string
-            The scale to use for the abscissa axis ('linear', 'log', 'logit' etc.)
+    directory : string
+        The directory where the graph will be saved.
+    curves : list[list[int or float]]
+        The list of curves to plot in the graph.
+    legends : list[string]
+        The labels corresponding to the curves.
+    abscissa_label : string
+        The label for the abscissa axis.
+    ordinate_label : string
+        The label for the ordinate axis.
+    title : string
+        The main title for the graph.
+    show_grid : bool
+        To show the grid of the graph.
+    abscissa_scale : string
+        The scale to use for the abscissa axis.
+        ('linear', 'log', 'logit' etc.)
+    ordinate_scale : string
+        The scale to use for the ordinate axis.
+        ('linear', 'log', 'logit' etc.)
     
     Examples
     --------
-    >>> import src.save as save
+    >>> import src.tools.save as save
     >>> identity = [ i for i in range(10)]
     >>> square = [ i*i for i in range(10) ]
     >>> save.graph("functions.svg", [identity, square], ["y = x", "y = x²"], "x", "y", "Usual functions")
@@ -53,11 +58,13 @@ def graph(directory, curves, legends,
     if abscissa_scale is not None:
         plt.xscale(abscissa_scale)
         plt.gca().xaxis.set_minor_formatter(NullFormatter())
+        plt.gca().xaxis.set_major_formatter(ScalarFormatter())
 
     # Setting the scale for the ordinate axis
     if ordinate_scale is not None:
         plt.yscale(ordinate_scale)
         plt.gca().yaxis.set_minor_formatter(NullFormatter())
+        plt.gca().yaxis.set_major_formatter(ScalarFormatter())
 
     # Showing the grid on the graph
     plt.grid(True) if show_grid else ""
